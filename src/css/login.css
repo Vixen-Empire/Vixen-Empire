@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative');
+
+.login-container{
+    background-image: url('../assets/images/mountain-landscape.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} 
+
+
+.google-btn{
+    height:fit-content
+}
+
+#or{
+    font-weight: 500;
+    text-shadow:1px 1px 1px rgb(121, 121, 121);
+}
+
+.login-banner{
+    position: fixed;
+    top: 14vh;
+    text-align: center;
+    margin: 0.5rem;
+}
+
+.login-banner h1{
+ font-size: clamp(1.75rem, 5vw, 5rem);
+ font-family: 'Cinzel Decorative';
+ font-weight: 800;
+ letter-spacing: 0.45rem;
+ text-shadow:2px 1px 2px rgb(121, 121, 121);
+}
+
+.login-banner h3{
+    margin-top: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+    text-shadow:1px 1px 2px rgb(121, 121, 121);
+}
+
+.sign-up{
+    color: black;
+}
+
+.sign-up:hover{
+    color: darkgoldenrod;
+    text-decoration: none;
+    text-shadow: 1px 0px 1px rgb(0, 0, 0);
+}

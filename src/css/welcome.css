@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative');
+
+.welcome-container{
+    position: relative;
+    width: 100%;
+    height:100vh;
+    background-color: black;
+}
+
+.logo{
+    margin:0 auto;
+    padding-top: 2rem;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+}
+
+.fox{
+    width: 60%;
+}
+/*animation for logo*/
+
+
+
+
+
+
+
+.title{
+    margin-top: 1rem;
+    font-size: 2.5rem;
+    font-family: 'Cinzel Decorative', cursive;
+    font-weight: 800;
+    letter-spacing: 0.45rem;
+    text-align: center;
+    color: rgb(221, 155, 67);
+    text-shadow:2px 1px 2px cornsilk;
+    
+}
+
+
+.login-btn{
+ display: flex;
+ justify-content: center;
+ margin-top: 2rem;
+}
+
+#welcome-btn{
+    font-size: 1.5rem;
+    color: cornsilk;
+    font-family: 'Cinzel Decorative', cursive;
+    background-color: transparent;
+    border: 2px 2px cornsilk;
+    border-radius: 5px;
+}
+
+#welcome-btn:hover{
+    background-color: darkgoldenrod;
+    text-shadow:2px 2px 5px rgb(8, 8, 8);
+    border-color: whitesmoke;
+    
+}
