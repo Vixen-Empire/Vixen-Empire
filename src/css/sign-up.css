@@ -1,8 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap');
+
 .sign-up-container{
     height: 100vh;
     background-image: url('../assets/images/mountain-side.png');
     background-size:cover;
     background-position: center;
     background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
+    
+}
+/*Outer most layer of the form*/
+.MuiGrid-root.MuiGrid-container{
+    width: 50vw;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  
+}
+/*Layer before form*/
+.MuiPaper-root.MuiPaper-elevation1.MuiPaper-rounded{
+ 
+ background-color: rgba(255, 221, 129, 0.425);
+
+}
+
+.MuiPaper-root.MuiPaper-elevation1.MuiPaper-rounded h1{
+    font-size: clamp(2rem, 1.95rem, 16px);
+    margin: 1rem;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Viaoda Libre';
+}
+
+.sign-up-form{
+ padding: 1rem;
+ box-sizing: border-box;
+
+}
+
+.input-feilds{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap:1rem;
+    
+}
+.MuiFormHelperText-root.Mui-error {
+    text-transform: capitalize;
+}
+.check-box{
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    justify-items: flex-start;
+}
+
+#signUp-submit{
+    margin: 0.8rem;
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width:699px) {
+    #form-container{
+        width: 90vw;
+    }
+    .input-feilds{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap:1rem;
+        
+    }
+
+}
+
+@media (max-width:490px){
+    .MuiPaper-root.MuiPaper-elevation1.MuiPaper-rounded{
+        margin:1rem auto
+       
+       }
 }
