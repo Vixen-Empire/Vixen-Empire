@@ -51,13 +51,12 @@
 }
 .MuiFormHelperText-root.Mui-error {
     text-transform: capitalize;
+    font-size: 0.5rem;
 }
-.check-box{
-    margin-top: 0.5rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    justify-items: flex-start;
+.tos-notice{
+ margin: 0.5rem;
+ font-size:clamp(1rem, 1vw, 10px);
+ text-align: center;
 }
 
 #signUp-submit{

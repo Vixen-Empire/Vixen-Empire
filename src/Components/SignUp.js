@@ -4,7 +4,8 @@ import { useSelector,useDispatch } from 'react-redux'
 import {selectUser,login} from '../assets/redux/userSlice'
 import TextFeild from '@material-ui/core/TextField'
 import formSchema from  '../assets/utiles/formSchema'
-
+import VisibilityIcon from '@material-ui/icons/Visibility'
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff'
 import * as Yup from 'yup'
 import {Checkbox,Grid, Paper, FormControlLabel,Button,withStyles} from '@material-ui/core'
 import '../css/sign-up.css'
@@ -13,72 +14,45 @@ import '../css/sign-up.css'
 function SignUp() {
     const user = useSelector(selectUser)
     const [newUser,setNewUser] = useState(user)
-    const [formError, setError] = useState(formSchema)
-    const [valid, setIsValid] = useState(false)
+    const [touched, setTouched] = useState({password: false, confirm: false});
+    const [visable, setVisable] = useState(false)
+    const [formError, setError] = useState({})
+    const [disabled, setDisabled] = useState(true);
 
     const dispatch = useDispatch()
     
     const history = useHistory()
 
-
-
-    const onInputChange = (e)=>{
-        const name = e.target.name
-        const value = e.target.value
-
-        setNewUser({
-           ...newUser,
-           [name]:value
-        })
-        Yup
-        .reach(formSchema, name)
-        .validate(value)
+    const onInputChange = (e) => {
+      const { name, value } = e.target;
+  
+      setNewUser({ ...newUser, [name]: value });
+      setTouched({...touched, [name]: true});
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      dispatch(login)
+      history.push('/den')
+    };
+  
+    useEffect(() => {
+      Yup
+        .reach(formSchema)
+        .validate(newUser, { abortEarly: false })
         .then(() => {
-          setError({
-            ...formError,
-            [name]: ''
-          })
-          if(value === ''){
-            setError({
-              ...formError,
-              [name]: ''
-            })
-          }
+          setError({});
         })
-       
-        .catch(err => {
-          setError({
-            ...formError,
-            [name]: err.errors[0] 
-            
+        .catch((err) => {
+          const errors = {};
+          err.inner.forEach(error => {
+            if(touched[error.path]) errors[error.path] = error.message;
           })
-          console.log(formError.password)
-        })
-
-    }
-
-    const handleSubmit = (e)=>{
-        e.preventDefault()
-        if(formSchema.isValid(newUser))
-        {
-          dispatch(login(newUser))
-          setIsValid(true)
-         console.log(user)
-        }else{
-          return
-        }
-
-    }
-        //Validation
-        useEffect(() => {
-          formSchema.isValid(newUser)
-            .then((valid)=>
-              setIsValid(true)
-            )
-
-        }, [newUser, setIsValid])
-
-
+          setError(errors);
+        });
+  
+      formSchema.isValid(newUser).then(valid => setDisabled(!valid));
+    }, [newUser]);
     //styles
     const SubmitButton = withStyles((theme) => ({
         root: {
@@ -90,19 +64,8 @@ function SignUp() {
  
         },
       }))(Button);
-   
-    const CheckTerms = withStyles((theme)=>({
-       root:{
-           
-           color:'#16044a',
-           '&:hover':{
-               backgroundColor: 'rgba(141, 93, 252,0.125)'
-           },
-           '&$checked':{
-            color:'#16044a'
-           },
-       }
-    }))((props) => <Checkbox color="default" {...props} />)
+
+    
 
     return (
         <div className="sign-up-container">
@@ -152,7 +115,7 @@ function SignUp() {
                     value={newUser.password} 
                     error={Boolean(formError.password)}
                     helperText={`${formError.password}`}
-                    type="password" 
+                   
                     />
                     :<TextFeild
                     required 
@@ -160,25 +123,27 @@ function SignUp() {
                     name="password"
                     onChange={onInputChange}
                     value={newUser.password} 
-                    type="password" 
+                    icon={visable ? VisibilityIcon : VisibilityOffIcon}
                     />
                   }
-                    { formError.confirm
-                    ?<TextFeild required 
+                    {formError.passwordConfirm
+                    ?<TextFeild 
+                    required 
                     label="Comfirm Password" 
-                    name="confirm"
-                    error={Boolean(formError.confirm)}
-                    helperText={`${formError.confirm}`}
-                    value={newUser.confirm} 
+                    name="passwordConfirm"
                     onChange={onInputChange}
-                    type="password"
+                    value={newUser.passwordConfirm} 
+                    error={Boolean(formError.passwordConfirm)}
+                    helperText={`${formError.passwordConfirm}`}
+                    
                     />
-                    :<TextFeild required 
+                    :<TextFeild 
+                    required 
                     label="Comfirm Password" 
-                    name="confirm"
-                    value={newUser.confirm} 
+                    name="passwordConfirm"
                     onChange={onInputChange}
-                    type="password"
+                    value={newUser.passwordConfirm} 
+                    
                     />
                    }
                     </div>
@@ -197,20 +162,11 @@ function SignUp() {
                     fullWidth required label="Username" />
                     }
                     
-                    <div className="check-box">       
-                    <FormControlLabel
-                            control={<CheckTerms  name="terms_of_service"  />}
-                            label="Terms of Service"
-                            helpertext="Terms of service must be accepted"
-                    />
-                    <FormControlLabel
-                            control={<CheckTerms  name="privacy_policy" />}
-                            label="Privacy Notice"
-                            helpertext="Privacy Notice must be accepted"
-                    />
+                    <div className="tos-notice">       
+                      <p>By <em>Starting Your Journey</em> you are accepting <a href='#'>Terms of Service</a> and <a href='#'>Privacy Policy</a> you must be 13yrs or older to play</p>
                     </div>  
                     <div id="signUp-submit">
-                      { valid 
+                      { disabled 
                       ? <SubmitButton variant="contained" color="primary" type="submit" disabled >Start Your Journey
                       </SubmitButton>
                       : <SubmitButton  variant="contained" color="primary" type="submit" >Start Your Journey

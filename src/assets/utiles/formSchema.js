@@ -1,8 +1,12 @@
 import * as Yup from "yup";
 
+const lowercaseRegex= /(?=.*[a-z])/
+const uppercaseRegex=/(?=.*[A-Z])/
+const specialCharcater=/(?=.*?[!@#\$&*~])/
+const numberRegex = /(?=.*?[0-9])/
+
 const formSchema = Yup.object().shape({
    
-
   name: Yup
   .string()
   .min(2, "Name must be 2 characters long")
@@ -11,6 +15,7 @@ const formSchema = Yup.object().shape({
   email: Yup
   .string()
   .email()
+  //.notOneOf(arr,message) to verify if email is in the array already
   .required("Please provide a valid email"),
 
   username: Yup
@@ -21,26 +26,17 @@ const formSchema = Yup.object().shape({
   
   password:Yup
   .string()
+  .matches(lowercaseRegex,`Must contain  one lower case`)
+  .matches(uppercaseRegex,"Must contain one upper case")
+  .matches(specialCharcater,"Must contain one Special character")
+  .matches(numberRegex,"Must contain one number")
   .min(8,  "Password must be at least 8 characters long.")
-
-  .required("Password is Required",),
-
-  confirm:Yup
+  .required("Password is Required"),
+  
+  passwordConfirm:Yup
   .string()
-  .oneOf([Yup.ref("password"), null], "Passwords must match"),
-  
-  
-  termsCheck: Yup
-  .boolean()
-  .oneOf([true], "Must accept Terms of Service to use")
-  .required("Must accept Terms of Service to use"),
-  privacyCheck: Yup
-  .boolean()
-  .oneOf([true], "Must read and accept Privacy Notice ")
-  .required("Must accept Privacy Notice"),
-  
-  
-
+  .oneOf([Yup.ref('password'), null],"Password must match")
+  .required('Confirm Password is required'),
 
 })
 
