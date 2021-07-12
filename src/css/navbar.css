@@ -1,0 +1,71 @@
+.den-navbar-container{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: fit-content
+}
+.den-navbar{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 100%;
+    position: fixed;
+    left: -100%;
+    background-color: rgba(169, 169, 169, 0.507);
+    
+}
+.den-navbar.active{
+    left:0;
+    width: 20vw;
+    transition: 1s;
+    
+}
+
+.den-nav-items{
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+    justify-content: center;
+    
+}
+
+.den-nav-items li{
+    margin:1rem;
+}
+#paw-menu-icon{
+    position: absolute;
+    top:0.5rem;
+    left:0.5rem;
+    width: 4rem;
+    filter:contrast(180%);
+    filter:drop-shadow(2px 2px 3px teal);
+    z-index:1;
+    transition-delay: 2s;
+}
+
+#paw-menu-icon:hover{
+    filter:contrast(120%);
+    filter:drop-shadow(2px 2px 3px rgb(225, 228, 228))
+}
+
+#close-menu-icon{
+    z-index: 1;
+    position: absolute;
+    top:1rem;
+    left:1rem;
+    animation-name:close-btn-fade-in;
+    animation-duration: 4s;
+}
+
+@keyframes close-btn-fade-in {
+    0%{
+     opacity: 0;
+    }
+    100%{
+      opacity: 1;
+    }
+}
+
+@media  (max-width:550px) {
+    /* Change the orientation of the menu to take enitre screen*/
+}

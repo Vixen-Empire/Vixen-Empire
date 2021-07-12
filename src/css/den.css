@@ -3,5 +3,13 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    height: 100vh;
+    background-attachment: fixed;
+    height: 150vh;
+    position: relative;
 }
+
+.main-den-content{
+height: 100vh;
+width: 100%;
+}
+
