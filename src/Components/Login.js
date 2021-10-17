@@ -1,48 +1,59 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import {login, selectUser} from '../assets/redux/userSlice'
-import {Link,Redirect} from 'react-router-dom'
-import {GoogleLogin} from 'react-google-login'
-import { responseFailure, refreshTokenSetup} from '../assets/utiles/google-auth'
+import React, { useState,useEffect } from 'react'
+import { useHistory} from 'react-router'
+import { Link } from 'react-router-dom'
+
+import {useAuth} from '../Context/Auth'
+import TextFeild from '@material-ui/core/TextField'
 import '../css/login.css'
+import { supabase } from '../assets/utiles/superbaseClient'
+
 
 
 function Login() {
-    
-    const dispatch = useDispatch()
-    const user = useSelector(selectUser)
-     
-     // Gets User Profile information
-        function responseGoogle(res) {
+    const [user, setUser]= useState({email:'',password:''})
+    const {signIn}=useAuth()
+    const history = useHistory()
+    const onInputChange = (e) => {
+      const { name, value } = e.target;
+  
+      setUser({ ...user, [name]: value })
+    };
+  async function handleSubmit(e) {
+    e.preventDefault()
+   const userEmail = user.email
+   const userPass = user.password
 
-            dispatch(login({
-                name:res.profileObj.name,
-                email:res.profileObj.email
-             }))
-            refreshTokenSetup(res)
-            console.log(user, res.profileObj)
-        }
-       if(user !== null){
-           return <Redirect to="/den" />
-       }
-    return (
-        
-        <div className="login-container">
+    const {error} = signIn({userEmail,userPass})
+    if(error){
+      alert('error in sign in')
+    }else{
+      history.push('./den')
+    }
+  }
+  async function googleLogin(){
+    const{user,session,error} = await supabase.auth.signIn({
+      provider:'google'
+    },{
+      redirectTo:'http://localhost:3000/den'
+    })
+  }
+   return   ( 
+   <div className="login-container">
             <section className="login-banner">
                 <h1>Your Adventure Awaits</h1>
                 <h3>Sign In Below</h3>
             </section>
-            <GoogleLogin className="google-btn" clientId="26301325702-51hihv2tkbh1njfq13b7ndcm0iq73e04.apps.googleusercontent.com" 
-            onSuccess={responseGoogle} 
-            onFailure={responseFailure}
-            isSignedIn={true}
-            cookiePolicy={'single_host_origin'}
-            />
-            <span id="or">or</span>
-            <Link className="sign-up" to="/sign-up">Create An Account</Link>
-        </div>
-        
-    )
-}
+            <section id='login-feild-contiainer'>
+              <TextFeild className="login-feild" label="Email" name="email" value={user.email} onChange={onInputChange} />
+              <TextFeild className="login-feild" label="Password" name="password" value={user.password} onChange={onInputChange} />
+                <button className="login-btn" onClick={handleSubmit} >Login</button>
+                <span id="or">or</span>
+              <Link className="sign-up" to="/sign-up">Create Account</Link>
+            </section>
+           </div>)
+           
+}        
+    
+
 
 export default Login

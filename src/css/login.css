@@ -5,28 +5,65 @@
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
-    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content:center;
+    align-content: center;
     align-items: center;
+    font-size:clamp(0.99rem, 1.5vw, 2%);
+    font-family:Georgia, 'Times New Roman', Times, serif;
 } 
 
+.login-btn{
+    width: 9rem;
+    height:2rem;
+    margin-top: 2rem;
+    align-items: center;
+    border-radius: 5px;
+    background-color: rgb(0, 0, 0);
+    color:white;
+    font-size: 1rem;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    letter-spacing: 0.1rem;
+}
+.login-btn:hover{
+ background-color:darkgoldenrod;
+ box-shadow: 3px 4px 5px black;
+ color: black;
+ text-shadow: 2px 2px 3px rgb(255, 255, 255);
+}
+.login-feild{
+    width: 50%;
+    margin: 1.5rem;
+}
+@media (max-width:680px) {
+    .login-feild{
+        width: 80%;
+    }
+    
+}
+#login-feild-contiainer{
+display: flex;
+flex-direction: column;
+width: 100%;
+align-items: center;
+justify-content: center;
 
+}
 .google-btn{
     height:fit-content
 }
 
 #or{
+    color: white;
+    margin: 1rem;
     font-weight: 500;
-    text-shadow:1px 1px 1px rgb(121, 121, 121);
+    text-shadow:2px 1px 3px rgb(2, 2, 2);
 }
 
 .login-banner{
-    position: fixed;
-    top: 14vh;
     text-align: center;
-    margin: 0.5rem;
+    margin-top:2rem;
 }
 
 .login-banner h1{
@@ -34,22 +71,26 @@
  font-family: 'Cinzel Decorative';
  font-weight: 800;
  letter-spacing: 0.45rem;
- text-shadow:2px 1px 2px rgb(121, 121, 121);
+ text-shadow:3px 1px 3px rgb(121, 121, 121);
 }
 
 .login-banner h3{
-    margin-top: 1rem;
-    font-family: 'Times New Roman', Times, serif;
+    margin: 1rem;
+    font-size: 1rem;
+    font-family:Georgia, 'Times New Roman', Times, serif;
     font-weight: 700;
-    text-shadow:1px 1px 2px rgb(121, 121, 121);
+    text-shadow:1px 1px 2px rgb(48, 48, 48);
 }
 
 .sign-up{
-    color: black;
+    color: rgb(255, 255, 255);
+    text-shadow: 3px 2px 3px rgb(0, 0, 0);
+    letter-spacing: 0.15rem;
+    text-decoration: none;
 }
 
 .sign-up:hover{
     color: darkgoldenrod;
     text-decoration: none;
-    text-shadow: 1px 0px 1px rgb(0, 0, 0);
+    text-shadow: 1.5px 1px 1.5px rgb(0, 0, 0);
 }

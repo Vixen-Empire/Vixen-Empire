@@ -10,7 +10,7 @@ function Welcome() {
              <img alt="Vixen Empire Fox Logo" className="fox" src={logo}/>
             </div>
             <h1 className="title">Welcome To The empire</h1>
-            <div className="login-btn">
+            <div className="welcome-btn">
             <Link to="/login"><button id="welcome-btn">enter</button></Link>
             </div>
         </div>

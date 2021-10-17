@@ -1,4 +1,5 @@
 import React from 'react'
+import{withRouter} from 'react-router-dom'
 import Navbar from '../Components/Navbar'
 import FoxStatBar from '../Components/FoxStatBar'
 import SelectedFox from '../Components/SelectedFox'
@@ -17,4 +18,4 @@ function Den() {
     )
 }
 
-export default Den
+export default withRouter(Den)

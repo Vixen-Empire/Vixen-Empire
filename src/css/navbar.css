@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
 .den-navbar-container{
     position: absolute;
     top: 0;
@@ -31,6 +32,14 @@
 
 .den-nav-items li{
     margin:1rem;
+    font-family: 'Libre Baskerville', serif;
+    text-decoration: 2px black underline;
+    text-shadow:2px 2px 4px black;
+}
+.den-nav-items li:hover{
+  color: darkgoldenrod;
+  text-decoration: 2px darkgoldenrod underline;
+  text-shadow: 2px 2px 4px black;
 }
 #paw-menu-icon{
     position: absolute;
@@ -54,12 +63,15 @@
     top:1rem;
     left:1rem;
     animation-name:close-btn-fade-in;
-    animation-duration: 4s;
+    animation-duration: 2s;
 }
 
 @keyframes close-btn-fade-in {
     0%{
      opacity: 0;
+    }
+    40%{
+        opacity: 0;
     }
     100%{
       opacity: 1;
@@ -68,4 +80,10 @@
 
 @media  (max-width:550px) {
     /* Change the orientation of the menu to take enitre screen*/
+    .den-navbar.active{
+        width:100%;
+    }
+    .den-nav-items{
+        align-items: center;
+    }
 }

@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from 'react'
-import {useHistory} from 'react-router-dom'
-import { useSelector,useDispatch } from 'react-redux'
-import {selectUser,login} from '../assets/redux/userSlice'
+import { useAuth } from '../Context/Auth'
 import TextFeild from '@material-ui/core/TextField'
 import formSchema from  '../assets/utiles/formSchema'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff'
 import * as Yup from 'yup'
-import {Checkbox,Grid, Paper, FormControlLabel,Button,withStyles} from '@material-ui/core'
+import {Grid, Paper,Button,withStyles} from '@material-ui/core'
 import '../css/sign-up.css'
+import { useHistory } from 'react-router'
 
 
 function SignUp() {
-    const user = useSelector(selectUser)
-    const [newUser,setNewUser] = useState(user)
+    const {signUp} = useAuth()
+    const [loading,setLoading]=useState(false)
+    const [newUser,setNewUser] = useState({
+      username:'',
+      name:'',
+      email:'',
+      password:'',
+      passwordConfirm:''
+    })
     const [touched, setTouched] = useState({password: false, confirm: false});
     const [visable, setVisable] = useState(false)
-    const [formError, setError] = useState({})
+    const [formError, setError] = useState(newUser)
     const [disabled, setDisabled] = useState(true);
-
-    const dispatch = useDispatch()
-    
-    const history = useHistory()
+    const history = useHistory
 
     const onInputChange = (e) => {
       const { name, value } = e.target;
@@ -30,10 +33,18 @@ function SignUp() {
       setTouched({...touched, [name]: true});
     };
   
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
-      dispatch(login)
-      history.push('/den')
+      const email= newUser.email
+      const password= newUser.password
+      console.log(email,password)
+      const {error}= await signUp({email,password})
+      setLoading(true)
+      if(error){
+        alert('error in sign up')
+      }else{
+        history.push('./den')
+      }
     };
   
     useEffect(() => {
@@ -78,23 +89,26 @@ function SignUp() {
                     ?<TextFeild required 
                     label="Name" 
                     name="name"
+                    type='text'
                     value={newUser.name} 
                     error={Boolean(formError.name)}
                     helperText={`${formError.name}` }
                     onChange={onInputChange}
-                    helpertext={formError.name}
                      />
                      :<TextFeild required 
                      label="Name" 
                      name="name"
                      value={newUser.name} 
                      onChange={onInputChange}
+                     type='text'
                       />
                     }
                     {formError.email
                     ?<TextFeild required
                      label="Email"
                      name="email"
+                     value={newUser.email}
+                     type='email'
                      onChange={onInputChange}
                      error={Boolean(formError.email)}
                      helperText={`${formError.email}`}
@@ -102,8 +116,10 @@ function SignUp() {
                     :<TextFeild required
                     label="Email"
                     name="email"
+                    value={newUser.email}
+                    type='email'
                     onChange={onInputChange}
-                    type="email"
+                    
                      />
                     }
                     {formError.password
@@ -111,6 +127,7 @@ function SignUp() {
                     required 
                     label="Password" 
                     name="password"
+                    type='password'
                     onChange={onInputChange}
                     value={newUser.password} 
                     error={Boolean(formError.password)}
@@ -121,6 +138,7 @@ function SignUp() {
                     required 
                     label="Password" 
                     name="password"
+                    type='password'
                     onChange={onInputChange}
                     value={newUser.password} 
                     icon={visable ? VisibilityIcon : VisibilityOffIcon}
@@ -131,6 +149,7 @@ function SignUp() {
                     required 
                     label="Comfirm Password" 
                     name="passwordConfirm"
+                    type='password'
                     onChange={onInputChange}
                     value={newUser.passwordConfirm} 
                     error={Boolean(formError.passwordConfirm)}
@@ -141,6 +160,7 @@ function SignUp() {
                     required 
                     label="Comfirm Password" 
                     name="passwordConfirm"
+                    type='password'
                     onChange={onInputChange}
                     value={newUser.passwordConfirm} 
                     
@@ -151,6 +171,7 @@ function SignUp() {
                     ?<TextFeild style={{marginTop:"1rem"}} 
                     onChange={onInputChange}
                     name="username"
+                    type='text'
                     value={newUser.username} 
                     error
                     helperText={`${formError.username}`}
@@ -159,6 +180,7 @@ function SignUp() {
                     onChange={onInputChange}
                     name="username"
                     value={newUser.username} 
+                    type='text'
                     fullWidth required label="Username" />
                     }
                     
@@ -169,7 +191,7 @@ function SignUp() {
                       { disabled 
                       ? <SubmitButton variant="contained" color="primary" type="submit" disabled >Start Your Journey
                       </SubmitButton>
-                      : <SubmitButton  variant="contained" color="primary" type="submit" >Start Your Journey
+                      : <SubmitButton  variant="contained" color="primary" type="submit" >{!loading ?'Start Your Journey' :'Loading'}
                       </SubmitButton>}
                    
                     </div>
