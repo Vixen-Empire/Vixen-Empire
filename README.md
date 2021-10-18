@@ -6,6 +6,9 @@ Vixen Empire is an interactive simulation game using React and Supabase.js.
 * [Technologies](#technologies)
 * [Currently Working On](#currently-working-on)
 * [Backend Framework](#backend-framework)
+* [Meet The Development Team](#meet-the-development-team)
+* [Follow On Social Media](#follow-on-social-media)
+* [Support The Project](#support-the-project)
 <br>
 
 ## Technologies
@@ -31,3 +34,13 @@ Project is created with:
  *Important DB INFO 🛑*
 
 <p>The Dabase will begin charging once reaching 10k users, or 1k MB storage or 500MB Database  </p>
+
+## Meet The Development Team
+|<img class="profile-img" src="https://github.com/Elisa-Alvarez.png" alt="Elisa Alvarez-Founder/Lead Developer Github Profile Image" height=100 width=100 style="border-radius:50%"/>|
+|:---------------------------------------------------------------------------:|
+|<h5>Elisa Alvarez</h5><h6>Founder and Lead Developer</h6>|
+
+## Support The Project
+
+<a href="https://www.buymeacoffee.com/VixenEmpire"><img src="https://img.buymeacoffee.com/button-api/?text=Buy the team a coffee&emoji=&slug=VixenEmpire&button_colour=c77400&font_colour=ffffff&font_family=Comic&outline_colour=ffffff&coffee_colour=FFDD00"></a>
+
