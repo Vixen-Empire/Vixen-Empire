@@ -1,4 +1,4 @@
-# Vixen Empire
+# Vixen Empire ![issues](https://img.shields.io/github/issues/Vixen-Empire/Vixen-Empire?style=plastic) ![license](https://img.shields.io/github/license/Vixen-Empire/Vixen-Empire?style=plastic)
 
 Vixen Empire is an interactive simulation game using React and Supabase.js. 
 
