@@ -4,25 +4,29 @@ import {supabase} from '../assets/utiles/superbaseClient'
 const AuthContext = React.createContext()
 
 export function Auth({children}){
-  const [user, setUser]= useState({})
+  const [user, setUser]= useState()
   const [loading,setLoading]=useState(false)
 
   useEffect(()=>{
    
-   const {session} =async()=> await supabase.auth.session()
+   const session = supabase.auth.session()
     if(session){
-      setUser(session.user)
-      setLoading(true)
+      const loggedIn = session.user
+      setUser(loggedIn)
     }
    const {data:listener} = supabase.auth.onAuthStateChange(
      async (event,session)=>{
       if(session){
-        setUser(session.user)
+        const loggedIn = session.user 
+        return setUser(loggedIn)
+        
       }
-       setLoading(false)
+       
      }
+     
    )
    return ()=>{
+    
     if(listener) listener.unsubscribe()
   } 
   },[])
