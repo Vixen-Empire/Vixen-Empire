@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth } from '../Context/Auth'
-import TextFeild from '@material-ui/core/TextField'
+import TextFeild from '@mui/material/TextField'
 import formSchema from  '../assets/utiles/formSchema'
-import VisibilityIcon from '@material-ui/icons/Visibility'
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff'
 import * as Yup from 'yup'
-import {Grid, Paper,Button,withStyles} from '@material-ui/core'
-import '../css/sign-up.css'
+import {Grid, Paper,Button} from '@mui/material'
+import { withStyles } from '@mui/styles';
 import { useHistory } from 'react-router'
+import '../css/sign-up.css'
+
 
 
 function SignUp() {
@@ -24,7 +24,7 @@ function SignUp() {
     const [visable, setVisable] = useState(false)
     const [formError, setError] = useState(newUser)
     const [disabled, setDisabled] = useState(true);
-    const history = useHistory
+    const history = useHistory()
 
     const onInputChange = (e) => {
       const { name, value } = e.target;
@@ -38,7 +38,9 @@ function SignUp() {
       const email= newUser.email
       const password= newUser.password
       console.log(email,password)
-      const {error}= await signUp({email,password})
+      const {error}= await signUp({email,password, cb:()=>{
+
+      }})
       setLoading(true)
       if(error){
         alert('error in sign up')
@@ -87,6 +89,7 @@ function SignUp() {
                     <div className="input-feilds">
                       {formError.name
                     ?<TextFeild required 
+                    id='signUp-input'
                     label="Name" 
                     name="name"
                     type='text'
@@ -141,7 +144,7 @@ function SignUp() {
                     type='password'
                     onChange={onInputChange}
                     value={newUser.password} 
-                    icon={visable ? VisibilityIcon : VisibilityOffIcon}
+                    
                     />
                   }
                     {formError.passwordConfirm
