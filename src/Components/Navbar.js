@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
 import Paw from '../assets/images/fox-paw.png'
 import CloseIcon from '@mui/icons-material/Close';
+import {Button} from '@mui/material'
 import {useAuth} from '../Context/Auth'
 import '../css/navbar.css'
 function Navbar() {
     const [toggle,setToggle] = useState(false)
     const {signOut}=useAuth()
     const showMenu = ()=>setToggle(!toggle)
-
-    async function logOut(e){
-        e.preventDefault()
-         const {error}= await signOut()
+    
+   
+    function logOut(){
+        signOut()
+        window.location.reload(false)
     }
     return (
         <div className="den-navbar-container">
@@ -22,9 +24,7 @@ function Navbar() {
                 <ul className="den-nav-items">
                     <li>My Skulk</li>
                     <li>Explore</li>
-                    <li onClick={logOut}>
-                    Logout
-                    </li>
+                    <Button onClick={logOut}>Logout</Button>
                 </ul>
             </nav>
         </div>
