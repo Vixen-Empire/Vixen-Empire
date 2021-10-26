@@ -14,7 +14,7 @@
     font-family:Georgia, 'Times New Roman', Times, serif;
 } 
 
-.login-btn{
+#login-btn{
     width: 9rem;
     height:2rem;
     margin-top: 2rem;
@@ -26,19 +26,16 @@
     font-family:Georgia, 'Times New Roman', Times, serif;
     letter-spacing: 0.1rem;
 }
-.login-btn:hover{
+#login-btn:hover{
  background-color:darkgoldenrod;
  box-shadow: 3px 4px 5px black;
  color: black;
  text-shadow: 2px 2px 3px rgb(255, 255, 255);
 }
-.login-feild{
-    width: 50%;
-    margin: 1.5rem;
-}
+
 @media (max-width:680px) {
-    .login-feild{
-        width: 80%;
+    div.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+        width: 80vw;
     }
     
 }
@@ -47,11 +44,27 @@ display: flex;
 flex-direction: column;
 width: 100%;
 align-items: center;
-justify-content: center;
+align-content: space-between;
 
 }
-.google-btn{
-    height:fit-content
+
+ #gBtn{
+    display: flex;
+    margin: 1rem;
+    background-color:#ffff;
+    color: black;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    letter-spacing: 0.125rem;
+    text-transform: capitalize;
+}
+
+#gBtn:hover{
+    background-color: #4285f4;
+    color: #ffff;
+}
+
+#gIcon{
+    margin: 0.25rem;
 }
 
 #or{
@@ -62,11 +75,15 @@ justify-content: center;
 }
 
 .login-banner{
-    text-align: center;
     margin-top:2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .login-banner h1{
+ text-align: center;
  font-size: clamp(1.75rem, 5vw, 5rem);
  font-family: 'Cinzel Decorative';
  font-weight: 800;

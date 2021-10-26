@@ -1,35 +1,24 @@
 import React, {useState,useEffect, useContext} from 'react'
-import { Route, Redirect} from 'react-router-dom'
-import {useSelector} from 'react-redux'
 import {supabase} from '../assets/utiles/superbaseClient'
 
 const AuthContext = React.createContext()
 
 export function Auth({children}){
-  const [user, setUser]= useState()
+  const [user, setUser]= useState({})
   const [loading,setLoading]=useState(false)
 
   useEffect(()=>{
    
-   const session = supabase.auth.session()
-   setUser(()=>{
-     if(session){
-       return session.user
-     }else{
-       null
-     }
-   })
-   setLoading(false)
-
+   const {session} =async()=> await supabase.auth.session()
+    if(session){
+      setUser(session.user)
+      setLoading(true)
+    }
    const {data:listener} = supabase.auth.onAuthStateChange(
      async (event,session)=>{
-       setUser(()=>{
-        if(session){
-          return session.user
-        }else{
-          null
-        }
-      })
+      if(session){
+        setUser(session.user)
+      }
        setLoading(false)
      }
    )
